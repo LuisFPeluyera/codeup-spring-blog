@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>All Posts</title>
+    <link rel="stylesheet" href="/css/index.css">
+
+</head>
+<body>
+<nav th:replace="partials/navabar :: navbar"/>
+<h1>Viewing All Post</h1>
+<!--<p> Here is Your guess: <span th:text="${userGuess}"></span></p>-->
+<div th:each="post : ${posts}">
+
+    <div class="ad-card">
+        <p>Id: <span th:text="${post.id}" ></span></p>
+        <p>Title: <span th:text="${post.title}" ></span></p>
+        <p> Description: <span th:text="${post.body}" ></span></p>
+
+        <form action="posts/delete" method="post">
+          <a th:href="@{/posts/{id}(id=${post.getId()})}">View Details</a>
+          <input name="id" th:hidden="true" th:value="${post.getId()}" >
+          <button type="submit">Delete</button>
+        </form>
+    </div>
+  <hr>
+</div>
+
+
+</div>
+</body>
+
+</html>

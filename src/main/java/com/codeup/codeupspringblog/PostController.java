@@ -1,36 +1,76 @@
 package com.codeup.codeupspringblog;
 
+import com.codeup.codeupspringblog.repository.PostRepository;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 public class PostController {
 
+
+    private final PostRepository postDao;
+
+    public PostController(PostRepository postDao) {
+
+        this.postDao = postDao;
+    }
+
+
+
     @GetMapping("/posts")
-    @ResponseBody
-    public String indexPage(){
-        return "posts index page";
+    public String indexPage(Model model){
+        ArrayList<Post> arrayList = new ArrayList<>();
+
+
+        ArrayList<Post> posts = (ArrayList<Post>) postDao.findAll();
+        model.addAttribute("posts", posts);
+
+        return "posts/index";
     }
 
     @GetMapping("/posts/{id}")
-    @ResponseBody
-    public String individualPost(@PathVariable int id){
-        return "posts index page";
+
+    public String individualPost(@PathVariable int id, Model model){
+
+
+        Post post = postDao.getPostById(id);
+
+
+       model.addAttribute("post", post);
+
+        return "posts/show";
     }
 
     @GetMapping("/posts/create")
-    @ResponseBody
     public String getCreate(){
-        return "view the form for creating a post";
+
+
+
+
+        return "/posts/create";
     }
 
     @PostMapping("/posts/create")
-    @ResponseBody
-    public String postCreate(){
-        return "view the form for creating a post";
+    public String postCreate(String title, String body, Model model){
+
+        Post newPost = new Post(title, body);
+        postDao.save(newPost);
+
+
+        return "redirect:/posts";
+    }
+
+    @PostMapping("/posts/delete")
+    public String postDelete(@RequestParam int id, Model model){
+
+        postDao.deleteById(id);
+
+
+        return "redirect:/posts";
     }
 
 

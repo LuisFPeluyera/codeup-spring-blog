@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Roll Dice</title>
+	<link rel="stylesheet" href="../css/roll-dice.css">
+
+</head>
+<body>
+<nav th:replace="partials/navabar :: navbar"/>
+<h1>Super Duper Dice Roll Result</h1>
+<p> Here is Your guess: <span th:text="${userGuess}"></span></p>
+<p>Here is the random number: <span th:text="${randomNumber}"></span></p>
+<p> <span th:text="${message}"></span></p>
+</div>
+</body>
+
+</html>
