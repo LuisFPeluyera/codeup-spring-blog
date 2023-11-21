@@ -8,17 +8,21 @@
 </head>
 <body>
   <nav th:replace="partials/navabar :: navbar"/>
-  <h1>Viewing Individual Id</h1>
+
   <div class="page-wrapper">
+    <h1>Viewing Individual Id</h1>
     <div class="ad-card">
-      <p> ID: <span th:text="${post.id}"></span></p>
+      <p> <span th:text="${post.getAuthor().email}"></span></p>
+
       <p>title: <span th:text="${post.title}"></span></p>
       <p>body: <span th:text="${post.body}"></span></p>
-
-      <form action="/posts/delete" method="post">
-        <input name="id" th:hidden="true" th:value="${post.getId()}" >
-        <button type="submit">Delete</button>
-      </form>
+      <div class="form-control">
+        <form action="/posts/delete" method="post">
+          <input name="id" th:hidden="true" th:value="${post.getId()}" >
+          <button type="submit">Delete</button>
+        </form>
+        <a th:href="@{/posts/update/{id}(id=${post.getId()})}">Update</a>
+      </div>
     </div>
   </div>
 

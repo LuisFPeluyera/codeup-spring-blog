@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Individual Post</title>
+  <link rel="stylesheet" href="/css/update.css">
+
+</head>
+<body>
+
+  <nav th:replace="partials/navabar :: navbar"/>
+
+  <h1>Create Post</h1>
+
+  <div class="page-wrapper">
+    <div class="ad-card">
+      <form action="/posts/update" method="post">
+        <div class="form-control">
+          <label for="title">title</label>
+          <input  type="text" name="title" id="title" th:value="${post.getTitle()}">
+
+          <label for="body">body</label>
+          <textarea name="body" id="body"  th:text="${post.getBody()}"></textarea>
+        </div>
+        <input name="id" th:hidden="true" th:value="${post.getId()}">
+        <input name="author" th:hidden="true" th:value="${post.getAuthor()}">
+        <button type="submit">Update</button>
+
+
+      </form>
+    </div>
+  </div>
+            <!---->
+            <!--<nav th:replace="partials/navabar :: navbar"/>-->
+
+            <!--<div class="page-wrapper">-->
+            <!--  <h1>Viewing Individual Id</h1>-->
+            <!--  <div class="ad-card">-->
+            <!--    <form action="/posts/update" method="post">-->
+
+            <!--      <input type="text">title: <span th:value="${post.title}"></span></input>-->
+            <!--      <input  type="text">body: <span th:value="${post.body}"></span></input>-->
+            <!--      <input name="id" th:hidden="true" th:value="${post.getId()}" >-->
+            <!--      <button type="submit">Update</button>-->
+            <!--    </form>-->
+            <!--  </div>-->
+            <!--</div>-->
+
+
+</body>
+
+</html>
