@@ -15,7 +15,7 @@ public class Post {
     @Column(nullable = false, length = 100)
     private String title;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 500)
     private String body;
 
 
@@ -59,7 +59,9 @@ public class Post {
         this.id = id;
     }
 
+    public static void main(String[] args) {
 
+    }
 }
 
 

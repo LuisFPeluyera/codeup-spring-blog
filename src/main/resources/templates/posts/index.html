@@ -10,7 +10,7 @@
 <nav th:replace="partials/navabar :: navbar"/>
 <h1>Viewing All Post</h1>
 <!--<p> Here is Your guess: <span th:text="${userGuess}"></span></p>-->
-<div th:each="post : ${posts}">
+<div class="page-wrapper" th:each="post : ${posts}">
 
     <div class="ad-card">
         <p>Id: <span th:text="${post.id}" ></span></p>
@@ -23,7 +23,7 @@
           <button type="submit">Delete</button>
         </form>
     </div>
-  <hr>
+
 </div>
 
 

@@ -18,7 +18,7 @@ button, .ad-card a {
     border-radius: 25px;
     border: none;
     text-decoration: none;
-    margin-top: 200px;
+    margin-top:100px;
 }
 
 .ad-card a {
@@ -48,6 +48,13 @@ button:hover, .ad-card a:hover {
     transform: scale(1.02);
 }
 
+.form-control {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 50px;
+}
+
 input#title {
     width: 300px;
     height: 20px;
@@ -57,7 +64,7 @@ input#title {
     border: none;
 }
 textarea#body {
-    min-width: 300px;
+   min-width: 300px;
     min-height: 200px;
     max-width: 300px;
     max-height: 200px;

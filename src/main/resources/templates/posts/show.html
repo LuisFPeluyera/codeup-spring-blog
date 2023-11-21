@@ -2,18 +2,25 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Roll Dice</title>
+  <title>Individual Post</title>
+  <link rel="stylesheet" href="/css/index.css">
 
 </head>
 <body>
-<nav th:replace="partials/navabar :: navbar"/>
-<h1>Viewing Individual Id</h1>
-<div>
+  <nav th:replace="partials/navabar :: navbar"/>
+  <h1>Viewing Individual Id</h1>
+  <div class="page-wrapper">
+    <div class="ad-card">
+      <p> ID: <span th:text="${post.id}"></span></p>
+      <p>title: <span th:text="${post.title}"></span></p>
+      <p>body: <span th:text="${post.body}"></span></p>
 
-  <p> ID: <span th:text="${post.id}"></span></p>
-  <p>title: <span th:text="${post.title}"></span></p>
-  <p>body: <span th:text="${post.body}"></span></p>
-</div>
+      <form action="/posts/delete" method="post">
+        <input name="id" th:hidden="true" th:value="${post.getId()}" >
+        <button type="submit">Delete</button>
+      </form>
+    </div>
+  </div>
 
 
 </body>
