@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">>
 <head>
   <meta charset="UTF-8">
   <title>Individual Post</title>
@@ -17,12 +17,22 @@
       <p>title: <span th:text="${post.title}"></span></p>
       <p>body: <span th:text="${post.body}"></span></p>
       <div class="form-control">
-        <form action="/posts/delete" method="post">
-          <input name="id" th:hidden="true" th:value="${post.getId()}" >
+        <form th:action="@{/posts/delete}" method="post" th:object="${post}">
+          <input name="id" th:hidden="true" th:value="${post.getId()}" th:field="*{id}">
           <button type="submit">Delete</button>
         </form>
-        <a th:href="@{/posts/update/{id}(id=${post.getId()})}">Update</a>
+        <form th:action="@{/posts/update/{id}(id=${post.getId()})}">
+          <button>Update</button>
+        </form>
+
       </div>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+      This content is only shown to authenticated users.
+
+      User ID: <span th:text="${#authentication.principal.id}"/>
+      Username: <span th:text="${#authentication.principal.username}"/>
+      Email: <span th:text="${#authentication.principal.email}"/>
     </div>
   </div>
 

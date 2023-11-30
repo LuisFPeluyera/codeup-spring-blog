@@ -21,6 +21,8 @@ public class Post {
     @JoinColumn (name = "author_id")
     private User author;
 
+
+
     public User getAuthor() {
         return author;
     }

@@ -2,8 +2,10 @@ package com.codeup.codeupspringblog.model;
 
 import com.codeup.codeupspringblog.model.Post;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -14,10 +16,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
@@ -32,6 +34,13 @@ public class User {
         this.email = email;
         this.password = password;
         this.posts = posts;
+    }
+    public User(User copy) {
+        id = copy.id;
+        username = copy.username;
+        email = copy.email;
+        password = copy.password;
+        posts = copy.posts;
     }
 
     public User(String username, String email, String password, List<Post>  posts) {
@@ -50,6 +59,7 @@ public class User {
     public User() {
 
     }
+
 
     public int getId() {
         return id;
@@ -90,4 +100,14 @@ public class User {
     public void setPosts(List<Post>  posts) {
         this.posts = posts;
     }
+
+//    public abstract Collection<? extends GrantedAuthority> getAuthorities();
+//
+//    public abstract boolean isAccountNonExpired();
+//
+//    public abstract boolean isAccountNonLocked();
+//
+//    public abstract boolean isCredentialsNonExpired();
+//
+//    public abstract boolean isEnabled();
 }

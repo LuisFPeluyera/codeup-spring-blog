@@ -4,6 +4,7 @@ import com.codeup.codeupspringblog.model.Post;
 import com.codeup.codeupspringblog.model.User;
 import com.codeup.codeupspringblog.repository.PostRepository;
 import com.codeup.codeupspringblog.repository.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -50,24 +51,25 @@ public class PostController {
     }
 
     @GetMapping("/posts/create")
-    public String getCreate(){
-
+    public String getCreate(Model model){
+    model.addAttribute(new Post());
 
 
         return "/posts/create";
     }
 
     @PostMapping("/posts/create")
-    public String postCreate(String title, String body, Model model){
+    public String postCreate(@ModelAttribute ("post") Post post){
+        User loggedInUser = (User) SecurityContextHolder
+                .getContext().getAuthentication().getPrincipal();
 
-        User user = userDao.getUserById(1);
+        User user = userDao.getUserById(loggedInUser.getId());
 
-        Post newPost = new Post(title, body);
-        System.out.println("got here ");
-        newPost.setAuthor(user);
-        System.out.println("past new post");
-        postDao.save(newPost);
-        System.out.println("post saved not");
+
+        post.setAuthor(user);
+
+        postDao.save(post);
+
 
         return "redirect:/posts";
     }
@@ -87,16 +89,15 @@ public class PostController {
 
         model.addAttribute("post", post);
 
-        return "/posts/update";
+        return "posts/update";
     }
 
     @PostMapping("/posts/update")
-    public String postUpdate(@RequestParam int id, String title, String body, Model model){
+    public String postUpdate(@ModelAttribute ("post") Post post){
 
 
-        Post updatedPost = new Post(id, title, body);
 
-        postDao.save(updatedPost);
+        postDao.save(post);
 
         return "redirect:/posts";
     }
